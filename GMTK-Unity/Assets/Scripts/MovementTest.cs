@@ -14,11 +14,7 @@ public class MovementTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int width = WorldCamera.pixelWidth;
-        int height = WorldCamera.pixelHeight;
         transform = this.GetComponent<Transform>();
-        topLeftBounds = new Vector2( -(((float)(width) / 2)/16), -(((float)(height) / 2)/16));
-        bottomRightBounds = new Vector2(((float)(width) / 2) / 16, ((float)(height) / 2) / 16);
         speed = 0.1f;
         velocity = new Vector2(speed, speed);
     }
@@ -26,6 +22,11 @@ public class MovementTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        int width = WorldCamera.pixelWidth;
+        int height = WorldCamera.pixelHeight;
+        topLeftBounds = new Vector2(-(((float)(width) / 2) / 16), -(((float)(height) / 2) / 16));
+        bottomRightBounds = new Vector2(((float)(width) / 2) / 16, ((float)(height) / 2) / 16);
+
         if (transform.position.x <= topLeftBounds.x)
             velocity.x = speed;
         if (transform.position.y <= topLeftBounds.y)
