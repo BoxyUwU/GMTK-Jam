@@ -22,7 +22,7 @@ public class WorldGenerator : MonoBehaviour
             int x = (int)Random.Range(topLeftBounds.x, bottomRightBounds.x);
             int y = (int)Random.Range(topLeftBounds.y, bottomRightBounds.y);
             GameObject plant = Instantiate(PlantPrefab, transform);
-            Vector3 spawnPos = new Vector3(x, y, 0);
+            Vector3 spawnPos = new Vector3(x, y, -1);
             plant.transform.position = spawnPos;
         }
     }
