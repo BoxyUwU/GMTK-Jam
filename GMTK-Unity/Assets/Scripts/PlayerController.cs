@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rigidbody;
     public float MaxSpeed;
 
+    public bool JumpResetsVelocity = false;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,9 +25,15 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 inputVelocity = new Vector2();
         //Jumping
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) && grounded)
         {
+            grounded = false;
             inputVelocity.y += JumpSpeed;
+
+            if (JumpResetsVelocity && rigidbody.velocity.y < 0)
+            {
+                rigidbody.velocity = new Vector2(rigidbody.velocity.x, 0);
+            }
         }
         //Left Right Movement
         if (Input.GetKey(KeyCode.A))
@@ -46,5 +55,11 @@ public class PlayerController : MonoBehaviour
         {
             rigidbody.velocity = new Vector2(-MaxSpeed, rigidbody.velocity.y);
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<GivesJump>() != null)
+            grounded = true;
     }
 }
