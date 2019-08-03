@@ -4823,11 +4823,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyContainer: {fileID: 893324243}
-  MinStartWidth: 0.1
-  MaxStartWidth: 0.5
-  MinEndWidth: 0.25
-  MaxEndWith: 0.75
-  LaserStartColor: {r: 1, g: 0.97261643, b: 0.40599996, a: 1}
+  MinStartWidth: 0.25
+  MaxStartWidth: 0.75
+  MinEndWidth: 0.1
+  MaxEndWith: 0.5
+  LaserStartColor: {r: 1, g: 0.9705, b: 0.41000003, a: 1}
   LaserEndColor: {r: 1, g: 0, b: 0, a: 1}
   ActiveEnemySwitchTime: 2
   TimerCount: 0
