@@ -83,11 +83,23 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "Enemy(Clone)")
+        {
+            grounded = true;
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // If we collide with something that has the GivesJump component then allow ourselves to jump again
         // I am currently using these on the floor and the platforms to detect whether we have landed after a jump
         if (collision.gameObject.GetComponent<GivesJump>() != null)
             grounded = true;
+        if (collision.gameObject.name == "Enemy(Clone)")
+        {
+            grounded = true;
+        }
     }
 }
