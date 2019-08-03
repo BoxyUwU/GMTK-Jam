@@ -31,7 +31,13 @@ public class CommanderEnemy : MonoBehaviour
             if (child.gameObject.layer == 8)
             {
                 bool withinConversionDistance = false;
-                if ((child.transform.position - this.transform.position).magnitude <= ConversionDistance)
+                Vector2 childPosition = child.transform.position;
+                Vector2 enemyPosition = this.transform.position;
+                float dX = Mathf.Abs(enemyPosition.x - childPosition.x);
+                float dY = Mathf.Abs(enemyPosition.y - childPosition.y);
+                float distance = Mathf.Max(dX, dY);
+
+                if (distance <= ConversionDistance)
                     withinConversionDistance = true;
 
                 if (withinConversionDistance && child.GetComponent<StatueEnemy>() != null)
@@ -42,6 +48,10 @@ public class CommanderEnemy : MonoBehaviour
                 {
                     SwapEnemyType(child.gameObject, RevertedEnemyPrefab);
                 }
+            }
+            else
+            {
+
             }
         }
 

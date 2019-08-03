@@ -174,7 +174,7 @@ MonoBehaviour:
   Speed: 5
   Damage: 1
   InvulnerabilityLength: 1
-  ConversionDistance: 10
+  ConversionDistance: 2.5
   ConvertedEnemyPrefab: {fileID: 4347114094098497281, guid: 78df29c4e07cd6f4f99569dcde085944,
     type: 3}
   RevertedEnemyPrefab: {fileID: 1670121219711786199, guid: 7c20235bf6e5b744896dc081a15223e2,

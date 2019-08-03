@@ -99,5 +99,5 @@ MonoBehaviour:
   EnemyParent: {fileID: 0}
   MaxEnemiesInCluster: 3
   MinEnemiesInCluster: 1
-  MaxEnemiesInScene: 10
+  MaxEnemiesInScene: 15
   RelativeSpawnPositions: []
