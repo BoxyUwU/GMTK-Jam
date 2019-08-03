@@ -50,10 +50,11 @@ public class ActiveEnemyManager : MonoBehaviour
 
             // Switch active enemy to newly selected enemy
             if (activeEnemy != null)
+            {
                 activeEnemy.GetComponent<Enemy>().Active = false;
+                activeEnemy.GetComponent<Rigidbody2D>().velocity = activeEnemy.GetComponent<Rigidbody2D>().velocity.normalized * activeEnemy.GetComponent<Enemy>().Speed;
+            }
             newActiveEnemy.GetComponent<Enemy>().Active = true;
-
-            activeEnemy.GetComponent<Rigidbody2D>().velocity = activeEnemy.GetComponent<Rigidbody2D>().velocity.normalized * activeEnemy.GetComponent<Enemy>().Speed;
 
             activeEnemy = newActiveEnemy;
         }

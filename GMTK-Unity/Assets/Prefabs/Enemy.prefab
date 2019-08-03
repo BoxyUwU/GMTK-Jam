@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed69dce1d942c4b4a83fcaab1bf1753b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxHealth: 0
   Amount: 1
 --- !u!114 &1227361215608516951
 MonoBehaviour:
@@ -110,9 +111,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fd2df7ae22f1f742990e53721dfa7d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Active: 0
   Speed: 3
   ActiveSpeed: 6
-  Active: 0
+  Damage: 1
+  ActiveDamage: 1
   ActiveSprite: {fileID: -3844533842920784563, guid: f0aeccd199309e14193e2dde7a3e75f4,
     type: 3}
   InactiveSprite: {fileID: -5913229624463224244, guid: f0aeccd199309e14193e2dde7a3e75f4,

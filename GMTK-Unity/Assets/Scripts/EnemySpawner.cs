@@ -36,7 +36,7 @@ public class EnemySpawner : MonoBehaviour
         {
             spawnTimerCount -= ((int)(spawnTimerCount / SpawnInterval)) * SpawnInterval;
 
-            int amountToSpawn = Random.Range(MinEnemiesInCluster, MaxEnemiesInCluster);
+            int amountToSpawn = Random.Range(MinEnemiesInCluster, MaxEnemiesInCluster + 1);
 
             for (int i = 0; i < amountToSpawn; i++)
             {

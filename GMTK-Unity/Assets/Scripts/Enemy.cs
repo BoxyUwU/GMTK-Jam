@@ -6,9 +6,13 @@ public class Enemy : MonoBehaviour
 {
 
     GameObject target;
+    public bool Active;
+
     public float Speed;
     public float ActiveSpeed;
-    public bool Active;
+
+    public int Damage;
+    public int ActiveDamage;
 
     public Sprite ActiveSprite;
     public Sprite InactiveSprite;
@@ -31,6 +35,24 @@ public class Enemy : MonoBehaviour
         else
         {
             this.GetComponent<SpriteRenderer>().sprite = InactiveSprite;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 13)
+        {
+            int damageToApply = 0;
+            if (Active)
+            {
+                damageToApply = ActiveDamage;
+            }
+            else
+            {
+                damageToApply = Damage;
+            }
+
+            GameObject.Find("Player").GetComponent<Health>().Amount -= damageToApply;
         }
     }
 
