@@ -12,7 +12,10 @@ public class Enemy : MonoBehaviour
     public float ActiveSpeed;
 
     public int Damage;
+    public float DamageInvulnerabilityLength;
+
     public int ActiveDamage;
+    public float ActiveDamageInvulnerabilityLength;
 
     public Sprite ActiveSprite;
     public Sprite InactiveSprite;
@@ -49,17 +52,29 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.layer == 13)
         {
-            int damageToApply = 0;
-            if (Active)
+            if (GameObject.Find("Player").GetComponent<Invincible>() == null)
             {
-                damageToApply = ActiveDamage;
-            }
-            else
-            {
-                damageToApply = Damage;
-            }
+                int damageToApply = 0;
+                float invulnerabilityTime = 0.0f;
+                if (Active)
+                {
+                    damageToApply = ActiveDamage;
+                    invulnerabilityTime = ActiveDamageInvulnerabilityLength;
+                }
+                else
+                {
+                    damageToApply = Damage;
+                    invulnerabilityTime = DamageInvulnerabilityLength;
+                }
 
-            GameObject.Find("Player").GetComponent<Health>().Amount -= damageToApply;
+                GameObject.Find("Player").GetComponent<Health>().Amount -= damageToApply;
+                Invincible invincible = GameObject.Find("Player").AddComponent<Invincible>();
+                invincible.Duration = invulnerabilityTime;
+                FlashSpriteRed flashRed = GameObject.Find("Player").AddComponent<FlashSpriteRed>();
+                flashRed.Duration = 0.5f;
+                flashRed.startColor = new Color(1, 0, 0, 0.125f);
+                flashRed.targetColor = new Color(1, 0, 0, 1f);
+            }
         }
     }
 

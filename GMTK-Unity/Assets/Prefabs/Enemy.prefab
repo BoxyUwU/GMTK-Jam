@@ -115,7 +115,9 @@ MonoBehaviour:
   Speed: 3
   ActiveSpeed: 6
   Damage: 1
-  ActiveDamage: 1
+  DamageInvulnerabilityLength: 1
+  ActiveDamage: 2
+  ActiveDamageInvulnerabilityLength: 2
   ActiveSprite: {fileID: -3844533842920784563, guid: f0aeccd199309e14193e2dde7a3e75f4,
     type: 3}
   InactiveSprite: {fileID: -5913229624463224244, guid: f0aeccd199309e14193e2dde7a3e75f4,
