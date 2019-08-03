@@ -10,12 +10,14 @@ public class TurretEnemy : MonoBehaviour
     GameObject target;
 
     public float FireRate;
-    public float BurstLength;
+    public float BurstDuration;
     public float BurstCoolDown;
 
     float fireRateCounter;
     float burstCooldownCounter;
-    float burstLengthCounter;
+    float burstDurationCounter;
+
+    bool firing;
 
     // Start is called before the first frame update
     void Start()
@@ -26,17 +28,42 @@ public class TurretEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        fireRateCounter += Time.deltaTime;
-        if (fireRateCounter >= FireRate)
+        // If we are in a birst
+        if (firing)
         {
-            fireRateCounter -= ((int)(fireRateCounter / FireRate)) * FireRate;
-            GameObject instantiatedBullet = Instantiate(BulletPrefab, GameObject.Find("BulletContainer").transform);
+            // Fire bullets
+            fireRateCounter += Time.deltaTime;
+            if (fireRateCounter >= FireRate)
+            {
+                fireRateCounter -= ((int)(fireRateCounter / FireRate)) * FireRate;
+                GameObject instantiatedBullet = Instantiate(BulletPrefab, GameObject.Find("BulletContainer").transform);
 
-            instantiatedBullet.transform.position = this.transform.position;
-            instantiatedBullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, target.transform.position - instantiatedBullet.transform.position);
+                instantiatedBullet.transform.position = this.transform.position;
+                instantiatedBullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, target.transform.position - instantiatedBullet.transform.position);
+                instantiatedBullet.transform.Rotate(0, 0, Random.Range(-BulletAngleVariation, BulletAngleVariation));
 
-            instantiatedBullet.AddComponent<Team>();
-            instantiatedBullet.GetComponent<Team>().TeamID = TeamIDs.Enemy;
+                instantiatedBullet.AddComponent<Team>();
+                instantiatedBullet.GetComponent<Team>().TeamID = TeamIDs.Enemy;
+            }
+
+            // Increment burst duration counter
+            burstDurationCounter += Time.deltaTime;
+            if (burstDurationCounter >= BurstDuration)
+            {
+                burstDurationCounter = 0f;
+                burstCooldownCounter = 0f;
+                firing = false;
+            }
+        } // If we are in the cooldown period between bursts
+        else if (firing == false)
+        {
+            burstCooldownCounter += Time.deltaTime;
+            if (burstCooldownCounter >= BurstCoolDown)
+            {
+                burstCooldownCounter = 0.0f;
+                firing = true;
+                fireRateCounter = 0.0f;
+            }
         }
     }
 }
