@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-        contactedPlatforms = new List<GameObject>();
     }
 
     void Update()
