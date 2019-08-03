@@ -74,17 +74,15 @@ public class PlayerController : MonoBehaviour
             inputVelocity.x += WalkSpeed;
         }
 
-        rigidbody.velocity += inputVelocity;
-
-        // Cap our horizontal momentum to avoid going faster and faster the longer we hold down A and D
-        if (rigidbody.velocity.x > MaxSpeed)
-        {
-            rigidbody.velocity = new Vector2(MaxSpeed, rigidbody.velocity.y);
-        }
-        if (rigidbody.velocity.x < -MaxSpeed)
-        {
-            rigidbody.velocity = new Vector2(-MaxSpeed, rigidbody.velocity.y);
-        }
+        // If adding movement velocity will put us over the MaxSpeed then set rigidbody velocity to max speed
+        // we can't just check if we are over MaxSpeed and retroactively set it to MaxSpeed because then we cant
+        // have outside forces push us faster than our MaxSpeed
+        if (rigidbody.velocity.x + inputVelocity.x >= MaxSpeed && rigidbody.velocity.x <= MaxSpeed)
+            rigidbody.velocity = new Vector2(MaxSpeed, rigidbody.velocity.y + inputVelocity.y);
+        else if (rigidbody.velocity.x + inputVelocity.x <= -MaxSpeed && rigidbody.velocity.x >= -MaxSpeed)
+            rigidbody.velocity = new Vector2(-MaxSpeed, rigidbody.velocity.y + inputVelocity.y);
+        else
+            rigidbody.velocity += inputVelocity;
 
         // Flip the sprite depending on our velocity.
         if (rigidbody.velocity.x < 0)
