@@ -55,6 +55,16 @@ public class PlayerController : MonoBehaviour
         {
             rigidbody.velocity = new Vector2(-MaxSpeed, rigidbody.velocity.y);
         }
+
+        if (rigidbody.velocity.x < 0)
+        {
+            this.GetComponent<SpriteRenderer>().flipX = false;
+        }
+        else
+        {
+            this.GetComponent<SpriteRenderer>().flipX = true;
+        }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

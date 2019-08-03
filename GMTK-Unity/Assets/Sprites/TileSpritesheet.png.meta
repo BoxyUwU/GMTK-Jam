@@ -8,6 +8,9 @@ TextureImporter:
   - first:
       213: -2886482800357091781
     second: TileSpritesheet_1
+  - first:
+      213: -5285737048968645580
+    second: TileSpritesheet_2
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -170,7 +173,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f00ef7cab38851e49a021bafae811f46
+      spriteID: 11e46946ffe69fe49873426f3848dead
       internalID: -4418137972919979924
       vertices: []
       indices: 
@@ -191,8 +194,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03ea1ce32be7b5745a3a02bee7661cfd
+      spriteID: 810dbac84936927459d3b6d14cea5427
       internalID: -2886482800357091781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSpritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 240
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 355313c95e5d92a4380d85214df3a826
+      internalID: -5285737048968645580
       vertices: []
       indices: 
       edges: []
