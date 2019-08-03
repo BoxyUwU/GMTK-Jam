@@ -9,7 +9,7 @@ public class ActiveEnemyManager : MonoBehaviour
     List<GameObject> enemies;
 
     public float ActiveEnemySwitchTime = 1;
-    float timerCount = 0.0f;
+    public float TimerCount = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -36,10 +36,10 @@ public class ActiveEnemyManager : MonoBehaviour
         }
 
         // Timer logic
-        timerCount += Time.deltaTime;
-        if ((timerCount >= ActiveEnemySwitchTime || activeEnemy == null) && enemies.Count > 0)
+        TimerCount += Time.deltaTime;
+        if ((TimerCount >= ActiveEnemySwitchTime || activeEnemy == null) && enemies.Count > 0)
         {
-            timerCount = 0.0f;
+            TimerCount = 0.0f;
 
             // Get a new active enemy
             // This makes it so we don't select the already active enemy
