@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        contactedPlatforms = new List<GameObject>();
     }
 
     void Update()
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
                 rigidbody.velocity = new Vector2(rigidbody.velocity.x, 0);
             }
         }
+
         //Left Right Movement
         if (Input.GetKey(KeyCode.A))
         {
@@ -83,23 +85,27 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.name == "Enemy(Clone)")
-        {
-            grounded = true;
-        }
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // If we collide with something that has the GivesJump component then allow ourselves to jump again
         // I am currently using these on the floor and the platforms to detect whether we have landed after a jump
         if (collision.gameObject.GetComponent<GivesJump>() != null)
-            grounded = true;
-        if (collision.gameObject.name == "Enemy(Clone)")
         {
             grounded = true;
+        }
+
+        // Add platforms we are in contact with to list
+        if (collision.gameObject.layer == 10)
+        {
+            collision.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == 10)
+        {
+            collision.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
         }
     }
 }
