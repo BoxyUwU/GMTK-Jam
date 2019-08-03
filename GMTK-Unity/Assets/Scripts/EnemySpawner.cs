@@ -10,6 +10,8 @@ public class EnemySpawner : MonoBehaviour
     public int MaxEnemiesInCluster;
     public int MinEnemiesInCluster;
 
+    public int MaxEnemiesInScene = 10;
+
     public List<Vector2> RelativeSpawnPositions;
 
     private float spawnTimerCount = 0.0f;
@@ -37,7 +39,7 @@ public class EnemySpawner : MonoBehaviour
     void Update()
     {
         spawnTimerCount += Time.deltaTime;
-        if (spawnTimerCount >= SpawnInterval)
+        if (spawnTimerCount >= SpawnInterval && GetEnemiesInScene() < MaxEnemiesInScene)
         {
             spawnTimerCount -= ((int)(spawnTimerCount / SpawnInterval)) * SpawnInterval;
 
@@ -53,5 +55,18 @@ public class EnemySpawner : MonoBehaviour
                                                                 instancedEnemy.transform.position.z);
             }
         }
+    }
+
+    private int GetEnemiesInScene()
+    {
+        int enemies = 0;
+        foreach (Transform child in GameObject.Find("EnemyContainer").transform)
+        {
+            if (child.gameObject.layer == 8)
+            {
+                enemies++;
+            }
+        }
+        return enemies;
     }
 }
