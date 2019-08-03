@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 4340016466233125527}
   - component: {fileID: 3551434730658786312}
   - component: {fileID: 9107151007549541737}
-  - component: {fileID: 1227361215608516951}
   - component: {fileID: 8910513585059988680}
+  - component: {fileID: -3135861751530589907}
   - component: {fileID: 5552982317509669481}
   - component: {fileID: 6340862235601487871}
   m_Layer: 8
-  m_Name: Enemy
+  m_Name: StatueEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,29 +99,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 0
   Amount: 1
---- !u!114 &1227361215608516951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1670121219711786199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fd2df7ae22f1f742990e53721dfa7d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Active: 0
-  Speed: 3
-  ActiveSpeed: 6
-  Damage: 1
-  DamageInvulnerabilityLength: 1
-  ActiveDamage: 2
-  ActiveDamageInvulnerabilityLength: 2
-  ActiveSprite: {fileID: -3844533842920784563, guid: f0aeccd199309e14193e2dde7a3e75f4,
-    type: 3}
-  InactiveSprite: {fileID: -5913229624463224244, guid: f0aeccd199309e14193e2dde7a3e75f4,
-    type: 3}
 --- !u!114 &8910513585059988680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,6 +112,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TeamID: 1
+--- !u!114 &-3135861751530589907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670121219711786199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8d11c362b52af8408387ad78afcc160, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 3
+  Damage: 1
+  InvulnerabilityLength: 1
 --- !u!61 &5552982317509669481
 BoxCollider2D:
   m_ObjectHideFlags: 0

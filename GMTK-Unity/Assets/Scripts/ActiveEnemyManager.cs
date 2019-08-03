@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ActiveEnemyManager : MonoBehaviour
 {
+    public GameObject CommanderPrefab;
+    public GameObject TurretPrefab;
+    public GameObject StatuePrefab;
+
     public GameObject EnemyContainer;
     GameObject activeEnemy;
     List<GameObject> enemies;
@@ -37,9 +41,9 @@ public class ActiveEnemyManager : MonoBehaviour
         foreach (Transform child in EnemyContainer.transform)
         {
             // Make sure we have an enemy
-            if (child.GetComponent<Enemy>() != null)
+            if (child.gameObject.layer == 8)
             {
-                if (child.GetComponent<Enemy>().Active)
+                if (child.GetComponent<CommanderEnemy>())
                     activeEnemy = child.gameObject;
                 enemies.Add(child.gameObject);
             }
@@ -60,13 +64,14 @@ public class ActiveEnemyManager : MonoBehaviour
             // Set old active enemy to innactive and set velocity back to normal
             if (activeEnemy != null)
             {
-                activeEnemy.GetComponent<Enemy>().Active = false;
-                activeEnemy.GetComponent<Rigidbody2D>().velocity = activeEnemy.GetComponent<Rigidbody2D>().velocity.normalized * activeEnemy.GetComponent<Enemy>().Speed;
+                //activeEnemy.GetComponent<Enemy>().Active = false;
+                SwapEnemyType(activeEnemy, StatuePrefab);
             }
 
             // Set new active enemy
             activeEnemy = nextActiveEnemy;
-            activeEnemy.GetComponent<Enemy>().Active = true;
+            //activeEnemy.GetComponent<Enemy>().Active = true;
+            SwapEnemyType(activeEnemy, CommanderPrefab);
 
             // Null the next active enemy variable
             nextActiveEnemy = null;
@@ -88,4 +93,15 @@ public class ActiveEnemyManager : MonoBehaviour
         }
         else { lineRenderer.enabled = false; }
     }
+
+    private void SwapEnemyType(GameObject enemy, GameObject prefab)
+    {
+        Vector2 position = enemy.transform.position;
+        Vector2 velocity = enemy.GetComponent<Rigidbody2D>().velocity;
+        GameObject instancedEnemy = Instantiate(prefab, EnemyContainer.transform);
+        instancedEnemy.transform.position = position;
+        instancedEnemy.GetComponent<Rigidbody2D>().velocity = velocity;
+        Destroy(enemy);
+    }
+
 }

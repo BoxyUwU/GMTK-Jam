@@ -43,9 +43,9 @@ public class Bullet : MonoBehaviour
 
         if (targetTeam.TeamID != bulletTeam.TeamID)
         {
-            if (collision.gameObject.GetComponent<Enemy>() != null)
+            if (collision.gameObject.layer == 8)
             {
-                if (collision.gameObject.GetComponent<Enemy>().Active)
+                if (collision.gameObject.GetComponent<CommanderEnemy>() != null)
                 {
                     collision.gameObject.GetComponent<Health>().Amount -= Damage;
                 }

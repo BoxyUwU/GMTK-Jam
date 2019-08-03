@@ -93,9 +93,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 683cb45c056f35549b61ac971a2684bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyPrefabs: {fileID: 0}
+  EnemyPrefabs: {fileID: 1670121219711786199, guid: 7c20235bf6e5b744896dc081a15223e2,
+    type: 3}
   SpawnInterval: 4
   EnemyParent: {fileID: 0}
   MaxEnemiesInCluster: 3
   MinEnemiesInCluster: 1
+  MaxEnemiesInScene: 10
   RelativeSpawnPositions: []
