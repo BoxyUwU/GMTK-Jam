@@ -8,11 +8,13 @@ public class PlayerController : MonoBehaviour
     //Variables
     public float WalkSpeed;
     public float JumpSpeed;
+    public float MaxSpeed;
+    public bool JumpResetsVelocity = false;
+    public GameObject BulletPrefab;
+    public GameObject BulletContainer;
+
     bool grounded = true;
     Rigidbody2D rigidbody;
-    public float MaxSpeed;
-
-    public bool JumpResetsVelocity = false;
 
 
     // Start is called before the first frame update
@@ -63,6 +65,14 @@ public class PlayerController : MonoBehaviour
         else
         {
             this.GetComponent<SpriteRenderer>().flipX = true;
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            GameObject instancedBullet = Instantiate(BulletPrefab, BulletContainer.transform, false);
+            instancedBullet.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, instancedBullet.transform.position.z);
+            instancedBullet.AddComponent<Team>();
+            instancedBullet.GetComponent<Team>().TeamID = TeamIDs.Player;
         }
 
     }
