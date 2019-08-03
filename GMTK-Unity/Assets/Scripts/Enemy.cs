@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
 
     GameObject target;
     public float Speed;
+    public float ActiveSpeed;
     public bool Active;
 
     public Sprite ActiveSprite;
@@ -39,11 +40,14 @@ public class Enemy : MonoBehaviour
             RecalculateVelocity();
     }
 
-    private void RecalculateVelocity()
+    public void RecalculateVelocity()
     {
         Vector2 velocity = target.transform.position - transform.position;
         velocity.Normalize();
-        velocity *= Speed;
+        if (Active)
+        { velocity *= ActiveSpeed; }
+        else
+        { velocity *= Speed; }
         this.GetComponent<Rigidbody2D>().velocity = velocity;
     }
 }

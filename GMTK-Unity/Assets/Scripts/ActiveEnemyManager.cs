@@ -52,6 +52,9 @@ public class ActiveEnemyManager : MonoBehaviour
             if (activeEnemy != null)
                 activeEnemy.GetComponent<Enemy>().Active = false;
             newActiveEnemy.GetComponent<Enemy>().Active = true;
+
+            activeEnemy.GetComponent<Rigidbody2D>().velocity = activeEnemy.GetComponent<Rigidbody2D>().velocity.normalized * activeEnemy.GetComponent<Enemy>().Speed;
+
             activeEnemy = newActiveEnemy;
         }
     }

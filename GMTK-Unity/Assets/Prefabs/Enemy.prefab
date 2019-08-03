@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 3
+  ActiveSpeed: 6
   Active: 0
   ActiveSprite: {fileID: -3844533842920784563, guid: f0aeccd199309e14193e2dde7a3e75f4,
     type: 3}
