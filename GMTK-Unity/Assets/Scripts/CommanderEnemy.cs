@@ -7,7 +7,11 @@ public class CommanderEnemy : MonoBehaviour
     public float Speed;
     public int Damage;
     public float InvulnerabilityLength;
+    public float ConversionDistance;
+    public GameObject ConvertedEnemyPrefab;
+    public GameObject RevertedEnemyPrefab;
 
+    List<GameObject> convertedEnemies;
     GameObject target;
     public bool recalculateDirection = true;
 
@@ -20,6 +24,27 @@ public class CommanderEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Get an up to date list of enemies
+        foreach (Transform child in GameObject.Find("EnemyContainer").transform)
+        {
+            // Make sure we have an enemy
+            if (child.gameObject.layer == 8)
+            {
+                bool withinConversionDistance = false;
+                if ((child.transform.position - this.transform.position).magnitude <= ConversionDistance)
+                    withinConversionDistance = true;
+
+                if (withinConversionDistance && child.GetComponent<StatueEnemy>() != null)
+                {
+                    SwapEnemyType(child.gameObject, ConvertedEnemyPrefab);
+                } 
+                else if (!withinConversionDistance && child.GetComponent<TurretEnemy>() != null)
+                {
+                    SwapEnemyType(child.gameObject, RevertedEnemyPrefab);
+                }
+            }
+        }
+
         if (recalculateDirection)
             UpdateVelocity();
     }
@@ -59,5 +84,15 @@ public class CommanderEnemy : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void SwapEnemyType(GameObject enemy, GameObject prefab)
+    {
+        Vector2 position = enemy.transform.position;
+        Vector2 velocity = enemy.GetComponent<Rigidbody2D>().velocity;
+        GameObject instancedEnemy = Instantiate(prefab, GameObject.Find("EnemyContainer").transform);
+        instancedEnemy.transform.position = position;
+        instancedEnemy.GetComponent<Rigidbody2D>().velocity = velocity;
+        Destroy(enemy);
     }
 }

@@ -23,6 +23,10 @@ public class TurretEnemy : MonoBehaviour
     void Start()
     {
         target = GameObject.Find("Player");
+        if (BurstCoolDown >= 0.5f)
+        {
+            burstCooldownCounter = BurstCoolDown - 0.5f;
+        }
     }
 
     // Update is called once per frame
