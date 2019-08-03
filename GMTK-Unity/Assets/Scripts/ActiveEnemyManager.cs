@@ -41,15 +41,12 @@ public class ActiveEnemyManager : MonoBehaviour
         {
             timerCount = 0.0f;
 
-            // Get a new active enemy that isn't the same as the current one
-            GameObject newActiveEnemy = enemies[Random.Range(0, enemies.Count - 1)];
+            // Get a new active enemy
+            // This makes it so we don't select the already active enemy
             if (enemies.Count >= 2)
-            {
-                do
-                {
-                    newActiveEnemy = enemies[Random.Range(0, enemies.Count - 1)];
-                } while (newActiveEnemy == activeEnemy);
-            }
+                enemies.Remove(activeEnemy);
+
+            GameObject newActiveEnemy = enemies[Random.Range(0, enemies.Count - 1)];
 
             // Switch active enemy to newly selected enemy
             if (activeEnemy != null)
