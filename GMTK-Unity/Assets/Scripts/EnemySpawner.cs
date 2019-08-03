@@ -23,6 +23,8 @@ public class EnemySpawner : MonoBehaviour
         if (spawnTimerCount >= SpawnInterval)
         {
             spawnTimerCount -= ((int)(spawnTimerCount / SpawnInterval)) * SpawnInterval;
+
+            // Spawn Enemy
             GameObject instancedEnemy = Instantiate(EnemyPrefabs, EnemyParent.transform, false);
             instancedEnemy.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, instancedEnemy.transform.position.z);
         }

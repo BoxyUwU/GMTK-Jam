@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
 
         rigidbody.velocity += inputVelocity;
 
+        // Cap our horizontal momentum to avoid going faster and faster the longer we hold down A and D
         if (rigidbody.velocity.x > MaxSpeed)
         {
             rigidbody.velocity = new Vector2(MaxSpeed, rigidbody.velocity.y);
@@ -58,6 +59,7 @@ public class PlayerController : MonoBehaviour
             rigidbody.velocity = new Vector2(-MaxSpeed, rigidbody.velocity.y);
         }
 
+        // Flip the sprite depending on our velocity.
         if (rigidbody.velocity.x < 0)
         {
             this.GetComponent<SpriteRenderer>().flipX = false;
@@ -67,10 +69,14 @@ public class PlayerController : MonoBehaviour
             this.GetComponent<SpriteRenderer>().flipX = true;
         }
 
+        // Logic for spawning bullets
         if (Input.GetMouseButtonDown(0))
         {
             GameObject instancedBullet = Instantiate(BulletPrefab, BulletContainer.transform, false);
             instancedBullet.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, instancedBullet.transform.position.z);
+
+            // We use this to make sure bullets don't damage us
+            // see Bullet.CS for more info
             instancedBullet.AddComponent<Team>();
             instancedBullet.GetComponent<Team>().TeamID = TeamIDs.Player;
         }
@@ -79,6 +85,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // If we collide with something that has the GivesJump component then allow ourselves to jump again
+        // I am currently using these on the floor and the platforms to detect whether we have landed after a jump
         if (collision.gameObject.GetComponent<GivesJump>() != null)
             grounded = true;
     }
