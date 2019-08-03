@@ -59,10 +59,13 @@ public class StatueEnemy : MonoBehaviour
                 GameObject.Find("Player").GetComponent<Health>().Amount -= Damage;
                 Invincible invincible = GameObject.Find("Player").AddComponent<Invincible>();
                 invincible.Duration = InvulnerabilityLength;
-                FlashSpriteRed flashRed = GameObject.Find("Player").AddComponent<FlashSpriteRed>();
-                flashRed.Duration = 0.5f;
-                flashRed.startColor = new Color(1, 0, 0, 0.125f);
-                flashRed.targetColor = new Color(1, 0, 0, 1f);
+                if (GameObject.Find("Player").GetComponent<FlashSpriteRed>() == null)
+                {
+                    FlashSpriteRed flashRed = GameObject.Find("Player").AddComponent<FlashSpriteRed>();
+                    flashRed.Duration = 0.5f;
+                    flashRed.startColor = new Color(1, 0, 0, 0.125f);
+                    flashRed.targetColor = new Color(1, 0, 0, 1f);
+                }
             }
         }
     }

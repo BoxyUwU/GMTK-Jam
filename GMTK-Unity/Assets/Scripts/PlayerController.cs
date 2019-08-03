@@ -110,6 +110,10 @@ public class PlayerController : MonoBehaviour
                 // see Bullet.CS for more info
                 instancedBullet.AddComponent<Team>();
                 instancedBullet.GetComponent<Team>().TeamID = TeamIDs.Player;
+
+                //Rotates bullet to mouse
+                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                instancedBullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - instancedBullet.transform.position);
             }
         }
     }

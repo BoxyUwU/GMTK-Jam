@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: 9185376951927652169
     second: ProjectileSpritesheet_0
+  - first:
+      213: -5642704804486539287
+    second: ProjectileSpritesheet_1
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -167,8 +170,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 311d484ec3bdfb94f8cd34fc6ea01c85
+      spriteID: a4cc69d0097ffec4a99a56f6d5f17fdd
       internalID: 9185376951927652169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProjectileSpritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 240
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d7f04b8788c9aa4c8f6e564ef6f7512
+      internalID: -5642704804486539287
       vertices: []
       indices: 
       edges: []

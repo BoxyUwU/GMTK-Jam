@@ -7,14 +7,11 @@ public class Bullet : MonoBehaviour
 
     public int Damage;
     public float Speed;
+    public float InvulnerabilityDuration;
 
     // Start is called before the first frame update
     void Start()
-    {
-        //Rotates bullet to mouse
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position);
-        
+    {   
     }
 
     // Update is called once per frame
@@ -52,7 +49,19 @@ public class Bullet : MonoBehaviour
             }
             else
             {
-                collision.gameObject.GetComponent<Health>().Amount -= Damage;
+                if (collision.gameObject.GetComponent<Invincible>() == null)
+                {
+                    collision.gameObject.GetComponent<Health>().Amount -= Damage;
+                    Invincible invincible = collision.gameObject.AddComponent<Invincible>();
+                    invincible.Duration = InvulnerabilityDuration;
+                    if (collision.gameObject.GetComponent<FlashSpriteRed>() == null)
+                    {
+                        FlashSpriteRed flashRed = collision.gameObject.AddComponent<FlashSpriteRed>();
+                        flashRed.Duration = 0.5f;
+                        flashRed.startColor = new Color(1, 0, 0, 0.125f);
+                        flashRed.targetColor = new Color(1, 0, 0, 1f);
+                    }
+                }
             }
             Destroy(this.gameObject);
         }
