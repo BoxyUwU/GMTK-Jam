@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour
 {
 
     GameObject target;
+    public float Speed;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +19,7 @@ public class Enemy : MonoBehaviour
     {
         Vector2 velocity = target.transform.position - transform.position;
         velocity.Normalize();
-        velocity /= 16;
-        transform.position += (Vector3)velocity;
+        velocity *= Speed;
+        this.GetComponent<Rigidbody2D>().velocity = velocity;
     }
 }

@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
     public GameObject BulletPrefab;
     public GameObject BulletContainer;
 
+    List<GameObject> collidedPlatforms;
+    List<GameObject> droppedPlatforms;
+
     bool grounded = true;
     Rigidbody2D rigidbody;
 
@@ -21,6 +24,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        collidedPlatforms = new List<GameObject>();
+        droppedPlatforms = new List<GameObject>();
     }
 
     void Update()
@@ -36,6 +41,23 @@ public class PlayerController : MonoBehaviour
             {
                 rigidbody.velocity = new Vector2(rigidbody.velocity.x, 0);
             }
+        }
+        
+        if (Input.GetKey(KeyCode.S))
+        {
+            foreach (var gameObject in collidedPlatforms)
+            {
+                gameObject.GetComponent<EdgeCollider2D>().enabled = false;
+                droppedPlatforms.Add(gameObject);
+            }
+        }
+        else
+        {
+            foreach (var gameObject in droppedPlatforms)
+            {
+                gameObject.GetComponent<EdgeCollider2D>().enabled = true;
+            }
+            droppedPlatforms.Clear();
         }
 
         //Left Right Movement
@@ -97,6 +119,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.layer == 10)
         {
             collision.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+            collidedPlatforms.Add(collision.gameObject);
         }
     }
 
