@@ -75,6 +75,7 @@ public class ActiveEnemyManager : MonoBehaviour
         // Draw laser from activeEnemy -> nextActiveEnemy
         if (activeEnemy != null && nextActiveEnemy != null)
         {
+            lineRenderer.enabled = true;
             lineRenderer.SetPosition(0, activeEnemy.transform.position);
             lineRenderer.SetPosition(1, nextActiveEnemy.transform.position);
             float startWidth = Mathf.Lerp(MinStartWidth, MaxStartWidth, TimerCount / ActiveEnemySwitchTime);
@@ -85,5 +86,6 @@ public class ActiveEnemyManager : MonoBehaviour
             lineRenderer.startColor = laserColor;
             lineRenderer.endColor = laserColor * 0.5f;
         }
+        else { lineRenderer.enabled = false; }
     }
 }
