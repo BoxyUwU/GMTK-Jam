@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     public bool JumpResetsVelocity = false;
     public GameObject BulletPrefab;
     public GameObject BulletContainer;
+    public float FireRate;
+    float fireRateCooldownTimer;
 
     List<GameObject> collidedPlatforms;
     List<GameObject> droppedPlatforms;
@@ -30,9 +32,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        fireRateCooldownTimer += Time.deltaTime;
+
         Vector2 inputVelocity = new Vector2();
         //Jumping
-        if (Input.GetKeyDown(KeyCode.W) && grounded)
+        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) && grounded)
         {
             grounded = false;
             inputVelocity.y += JumpSpeed;
@@ -93,7 +97,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Laser sight
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        /*Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 raycastDirection = mousePos - transform.position;
         RaycastHit2D[] hits = Physics2D.RaycastAll(this.transform.position, raycastDirection);
         Vector2 hitLocation = new Vector2();
@@ -107,20 +111,24 @@ public class PlayerController : MonoBehaviour
             }
         }
         this.GetComponent<LineRenderer>().SetPosition(0, new Vector3(this.transform.position.x, this.transform.position.y, 0));
-        this.GetComponent<LineRenderer>().SetPosition(1, new Vector3(hitLocation.x, hitLocation.y, 0));
+        this.GetComponent<LineRenderer>().SetPosition(1, new Vector3(hitLocation.x, hitLocation.y, 0));*/
 
         // Logic for spawning bullets
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
-            GameObject instancedBullet = Instantiate(BulletPrefab, BulletContainer.transform, false);
-            instancedBullet.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, instancedBullet.transform.position.z);
+            if (fireRateCooldownTimer >= FireRate)
+            {
+                fireRateCooldownTimer = 0;
 
-            // We use this to make sure bullets don't damage us
-            // see Bullet.CS for more info
-            instancedBullet.AddComponent<Team>();
-            instancedBullet.GetComponent<Team>().TeamID = TeamIDs.Player;
+                GameObject instancedBullet = Instantiate(BulletPrefab, BulletContainer.transform, false);
+                instancedBullet.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, instancedBullet.transform.position.z);
+
+                // We use this to make sure bullets don't damage us
+                // see Bullet.CS for more info
+                instancedBullet.AddComponent<Team>();
+                instancedBullet.GetComponent<Team>().TeamID = TeamIDs.Player;
+            }
         }
-
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

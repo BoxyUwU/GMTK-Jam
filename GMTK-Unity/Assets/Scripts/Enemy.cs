@@ -16,6 +16,10 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         target = GameObject.Find("Player");
+        Vector2 velocity = target.transform.position - transform.position;
+        velocity.Normalize();
+        velocity *= Speed;
+        this.GetComponent<Rigidbody2D>().velocity = velocity;
     }
 
     // Update is called once per frame
@@ -27,8 +31,9 @@ public class Enemy : MonoBehaviour
 
             Vector2 velocity = target.transform.position - transform.position;
             velocity.Normalize();
-            velocity *= Speed * Time.deltaTime;
-            this.GetComponent<Rigidbody2D>().MovePosition(this.transform.position + (Vector3)velocity);
+            velocity *= Speed;
+            //this.GetComponent<Rigidbody2D>().MovePosition(this.transform.position + (Vector3)velocity);
+            this.GetComponent<Rigidbody2D>().velocity = velocity;
         }
         else
         {

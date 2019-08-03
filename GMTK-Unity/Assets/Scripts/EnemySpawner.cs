@@ -23,6 +23,8 @@ public class EnemySpawner : MonoBehaviour
             new Vector2(-1, 0),
             new Vector2(0.5f, 1),
             new Vector2(-0.5f, 1),
+            new Vector2(0.5f, -1),
+            new Vector2(-0.5f, -1),
         };
     }
 
@@ -34,12 +36,17 @@ public class EnemySpawner : MonoBehaviour
         {
             spawnTimerCount -= ((int)(spawnTimerCount / SpawnInterval)) * SpawnInterval;
 
-            // Spawn Enemy
-            Vector2 offset = RelativeSpawnPositions[Random.Range(0, RelativeSpawnPositions.Count - 1)];
-            GameObject instancedEnemy = Instantiate(EnemyPrefabs, EnemyParent.transform, false);
-            instancedEnemy.transform.position = new Vector3(this.transform.position.x + offset.x, 
-                                                            this.transform.position.y + offset.y, 
-                                                            instancedEnemy.transform.position.z);
+            int amountToSpawn = Random.Range(MinEnemiesInCluster, MaxEnemiesInCluster);
+
+            for (int i = 0; i < amountToSpawn; i++)
+            {
+                // Spawn Enemy
+                Vector2 offset = RelativeSpawnPositions[Random.Range(0, RelativeSpawnPositions.Count - 1)];
+                GameObject instancedEnemy = Instantiate(EnemyPrefabs, EnemyParent.transform, false);
+                instancedEnemy.transform.position = new Vector3(this.transform.position.x + offset.x,
+                                                                this.transform.position.y + offset.y,
+                                                                instancedEnemy.transform.position.z);
+            }
         }
     }
 }
