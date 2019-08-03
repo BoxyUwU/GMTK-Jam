@@ -20,7 +20,6 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         //Bullet Movement
         transform.position += transform.up * Speed * Time.deltaTime;
 
@@ -52,18 +51,4 @@ public class Bullet : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-
-
+}

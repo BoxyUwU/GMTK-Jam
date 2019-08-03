@@ -24,15 +24,15 @@ public class Enemy : MonoBehaviour
         if (Active)
         {
             this.GetComponent<SpriteRenderer>().sprite = ActiveSprite;
+
+            Vector2 velocity = target.transform.position - transform.position;
+            velocity.Normalize();
+            velocity *= Speed * Time.deltaTime;
+            this.GetComponent<Rigidbody2D>().MovePosition(this.transform.position + (Vector3)velocity);
         }
         else
         {
             this.GetComponent<SpriteRenderer>().sprite = InactiveSprite;
         }
-
-        Vector2 velocity = target.transform.position - transform.position;
-        velocity.Normalize();
-        velocity *= Speed;
-        this.GetComponent<Rigidbody2D>().velocity = velocity;
     }
 }

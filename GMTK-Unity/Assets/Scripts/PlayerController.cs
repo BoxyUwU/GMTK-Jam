@@ -92,6 +92,23 @@ public class PlayerController : MonoBehaviour
             this.GetComponent<SpriteRenderer>().flipX = true;
         }
 
+        // Laser sight
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 raycastDirection = mousePos - transform.position;
+        RaycastHit2D[] hits = Physics2D.RaycastAll(this.transform.position, raycastDirection);
+        Vector2 hitLocation = new Vector2();
+        float closestDistance = float.MaxValue;
+        foreach (var hit in hits)
+        {
+            if (hit.collider.gameObject.layer == 12 && hit.distance <= closestDistance)
+            {
+                hitLocation = hit.point;
+                closestDistance = hit.distance;
+            }
+        }
+        this.GetComponent<LineRenderer>().SetPosition(0, new Vector3(this.transform.position.x, this.transform.position.y, 0));
+        this.GetComponent<LineRenderer>().SetPosition(1, new Vector3(hitLocation.x, hitLocation.y, 0));
+
         // Logic for spawning bullets
         if (Input.GetMouseButtonDown(0))
         {

@@ -11,6 +11,9 @@ TextureImporter:
   - first:
       213: -5285737048968645580
     second: TileSpritesheet_2
+  - first:
+      213: -4373386652465239477
+    second: TileSpritesheet_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -167,13 +170,13 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 11e46946ffe69fe49873426f3848dead
+      spriteID: 9fc88e9ea2043ce4784e6ed011221b64
       internalID: -4418137972919979924
       vertices: []
       indices: 
@@ -188,13 +191,13 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 810dbac84936927459d3b6d14cea5427
+      spriteID: ae7bbae705ef4094a8f8758fb891e42c
       internalID: -2886482800357091781
       vertices: []
       indices: 
@@ -209,14 +212,35 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 355313c95e5d92a4380d85214df3a826
+      spriteID: b3b1cde3851453b4faa20c1b77c6e3d4
       internalID: -5285737048968645580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSpritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 240
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d060570b9e3b77b469d3e53bbbe07c99
+      internalID: -4373386652465239477
       vertices: []
       indices: 
       edges: []
