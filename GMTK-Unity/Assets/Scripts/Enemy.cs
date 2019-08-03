@@ -30,11 +30,18 @@ public class Enemy : MonoBehaviour
         if (Active)
         {
             this.GetComponent<SpriteRenderer>().sprite = ActiveSprite;
-            RecalculateVelocity();
         }
         else
         {
             this.GetComponent<SpriteRenderer>().sprite = InactiveSprite;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (Active)
+        {
+            RecalculateVelocity();
         }
     }
 
