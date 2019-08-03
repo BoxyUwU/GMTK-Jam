@@ -16,10 +16,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         target = GameObject.Find("Player");
-        Vector2 velocity = target.transform.position - transform.position;
-        velocity.Normalize();
-        velocity *= Speed;
-        this.GetComponent<Rigidbody2D>().velocity = velocity;
+        RecalculateVelocity();
     }
 
     // Update is called once per frame
@@ -28,16 +25,25 @@ public class Enemy : MonoBehaviour
         if (Active)
         {
             this.GetComponent<SpriteRenderer>().sprite = ActiveSprite;
-
-            Vector2 velocity = target.transform.position - transform.position;
-            velocity.Normalize();
-            velocity *= Speed;
-            //this.GetComponent<Rigidbody2D>().MovePosition(this.transform.position + (Vector3)velocity);
-            this.GetComponent<Rigidbody2D>().velocity = velocity;
+            RecalculateVelocity();
         }
         else
         {
             this.GetComponent<SpriteRenderer>().sprite = InactiveSprite;
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == 12)
+            RecalculateVelocity();
+    }
+
+    private void RecalculateVelocity()
+    {
+        Vector2 velocity = target.transform.position - transform.position;
+        velocity.Normalize();
+        velocity *= Speed;
+        this.GetComponent<Rigidbody2D>().velocity = velocity;
     }
 }
