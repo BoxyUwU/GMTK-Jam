@@ -4,18 +4,26 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+
     public int Damage;
+    public float Speed;
 
     // Start is called before the first frame update
     void Start()
     {
+        //Rotates bullet to mouse
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position);
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+        //Bullet Movement
+        transform.position += transform.up * Speed * Time.deltaTime;
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -34,4 +42,18 @@ public class Bullet : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-}
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
