@@ -7,6 +7,15 @@ public class ActiveEnemyManager : MonoBehaviour
     public GameObject EnemyContainer;
     GameObject activeEnemy;
     List<GameObject> enemies;
+    LineRenderer lineRenderer;
+    GameObject nextActiveEnemy;
+
+    public float MinStartWidth = 0.1f;
+    public float MaxStartWidth = 0.5f;
+    public float MinEndWidth = 0.1f;
+    public float MaxEndWith = 0.5f;
+    public Color LaserStartColor;
+    public Color LaserEndColor;
 
     public float ActiveEnemySwitchTime = 1;
     public float TimerCount = 0.0f;
@@ -15,12 +24,13 @@ public class ActiveEnemyManager : MonoBehaviour
     void Start()
     {
         enemies = new List<GameObject>();
+        lineRenderer = this.GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        bool setActiveEnemy = false;
+        TimerCount += Time.deltaTime;
 
         // Get an up to date list of enemies
         enemies.Clear();
@@ -29,34 +39,51 @@ public class ActiveEnemyManager : MonoBehaviour
             // Make sure we have an enemy
             if (child.GetComponent<Enemy>() != null)
             {
-                enemies.Add(child.gameObject);
                 if (child.GetComponent<Enemy>().Active)
                     activeEnemy = child.gameObject;
+                enemies.Add(child.gameObject);
             }
         }
 
+        // Store the next active enemy
+        if (nextActiveEnemy == null && enemies.Count > 0)
+        {
+            enemies.Remove(activeEnemy);
+            nextActiveEnemy = enemies[Random.Range(0, enemies.Count)];
+        }
+
         // Timer logic
-        TimerCount += Time.deltaTime;
         if ((TimerCount >= ActiveEnemySwitchTime || activeEnemy == null) && enemies.Count > 0)
         {
             TimerCount = 0.0f;
 
-            // Get a new active enemy
-            // This makes it so we don't select the already active enemy
-            if (enemies.Count >= 2)
-                enemies.Remove(activeEnemy);
-
-            GameObject newActiveEnemy = enemies[Random.Range(0, enemies.Count - 1)];
-
-            // Switch active enemy to newly selected enemy
+            // Set old active enemy to innactive and set velocity back to normal
             if (activeEnemy != null)
             {
                 activeEnemy.GetComponent<Enemy>().Active = false;
                 activeEnemy.GetComponent<Rigidbody2D>().velocity = activeEnemy.GetComponent<Rigidbody2D>().velocity.normalized * activeEnemy.GetComponent<Enemy>().Speed;
             }
-            newActiveEnemy.GetComponent<Enemy>().Active = true;
 
-            activeEnemy = newActiveEnemy;
+            // Set new active enemy
+            activeEnemy = nextActiveEnemy;
+            activeEnemy.GetComponent<Enemy>().Active = true;
+
+            // Null the next active enemy variable
+            nextActiveEnemy = null;
+        }
+
+        // Draw laser from activeEnemy -> nextActiveEnemy
+        if (activeEnemy != null && nextActiveEnemy != null)
+        {
+            lineRenderer.SetPosition(0, activeEnemy.transform.position);
+            lineRenderer.SetPosition(1, nextActiveEnemy.transform.position);
+            float startWidth = Mathf.Lerp(MinStartWidth, MaxStartWidth, TimerCount / ActiveEnemySwitchTime);
+            float endWidth = Mathf.Lerp(MinEndWidth, MaxEndWith, TimerCount / ActiveEnemySwitchTime);
+            Color laserColor = Color.Lerp(LaserStartColor, LaserEndColor, TimerCount / ActiveEnemySwitchTime);
+            lineRenderer.startWidth = startWidth;
+            lineRenderer.endWidth = endWidth;
+            lineRenderer.startColor = laserColor * 0.5f;
+            lineRenderer.endColor = laserColor;
         }
     }
 }

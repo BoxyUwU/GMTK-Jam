@@ -26,6 +26,11 @@ public class EnemySpawner : MonoBehaviour
             new Vector2(0.5f, -1),
             new Vector2(-0.5f, -1),
         };
+
+        if (SpawnInterval > 0.5f)
+        {
+            spawnTimerCount = SpawnInterval - 0.5f;
+        }
     }
 
     // Update is called once per frame
