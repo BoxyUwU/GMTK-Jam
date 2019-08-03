@@ -7988,7 +7988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WalkSpeed: 2
-  JumpSpeed: 20
+  JumpSpeed: 30
   MaxSpeed: 10
   JumpResetsVelocity: 1
   BulletPrefab: {fileID: 8820917419913483942, guid: 67923d220ae35494b883f908830f7700,

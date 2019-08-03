@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     List<GameObject> collidedPlatforms;
     List<GameObject> droppedPlatforms;
 
-    bool grounded = true;
+    bool hasJump = true;
     Rigidbody2D rigidbody;
 
 
@@ -36,9 +36,9 @@ public class PlayerController : MonoBehaviour
 
         Vector2 inputVelocity = new Vector2();
         //Jumping
-        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) && grounded)
+        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) && hasJump)
         {
-            grounded = false;
+            hasJump = false;
             inputVelocity.y += JumpSpeed;
 
             if (JumpResetsVelocity && rigidbody.velocity.y < 0)
@@ -96,23 +96,6 @@ public class PlayerController : MonoBehaviour
             this.GetComponent<SpriteRenderer>().flipX = true;
         }
 
-        // Laser sight
-        /*Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 raycastDirection = mousePos - transform.position;
-        RaycastHit2D[] hits = Physics2D.RaycastAll(this.transform.position, raycastDirection);
-        Vector2 hitLocation = new Vector2();
-        float closestDistance = float.MaxValue;
-        foreach (var hit in hits)
-        {
-            if (hit.collider.gameObject.layer == 12 && hit.distance <= closestDistance)
-            {
-                hitLocation = hit.point;
-                closestDistance = hit.distance;
-            }
-        }
-        this.GetComponent<LineRenderer>().SetPosition(0, new Vector3(this.transform.position.x, this.transform.position.y, 0));
-        this.GetComponent<LineRenderer>().SetPosition(1, new Vector3(hitLocation.x, hitLocation.y, 0));*/
-
         // Logic for spawning bullets
         if (Input.GetMouseButton(0))
         {
@@ -137,7 +120,11 @@ public class PlayerController : MonoBehaviour
         // I am currently using these on the floor and the platforms to detect whether we have landed after a jump
         if (collision.gameObject.GetComponent<GivesJump>() != null)
         {
-            grounded = true;
+            // If the wall we platform we hit when raycasting downwards
+            if (rigidbody.velocity.y <= 0 + float.Epsilon)
+            {
+                hasJump = true;
+            }
         }
 
         // Add platforms we are in contact with to list
