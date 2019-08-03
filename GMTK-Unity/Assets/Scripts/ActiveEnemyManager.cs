@@ -82,8 +82,8 @@ public class ActiveEnemyManager : MonoBehaviour
             Color laserColor = Color.Lerp(LaserStartColor, LaserEndColor, TimerCount / ActiveEnemySwitchTime);
             lineRenderer.startWidth = startWidth;
             lineRenderer.endWidth = endWidth;
-            lineRenderer.startColor = laserColor * 0.5f;
-            lineRenderer.endColor = laserColor;
+            lineRenderer.startColor = laserColor;
+            lineRenderer.endColor = laserColor * 0.5f;
         }
     }
 }
