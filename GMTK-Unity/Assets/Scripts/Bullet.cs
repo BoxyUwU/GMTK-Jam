@@ -27,6 +27,12 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.layer == 12)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
         // If the bullet is on a different team than what it collided with, damage it then destroy the bullet.
         Team targetTeam = collision.gameObject.GetComponent<Team>();
         Team bulletTeam = this.GetComponent<Team>();
