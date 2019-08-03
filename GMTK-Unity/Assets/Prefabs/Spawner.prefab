@@ -95,3 +95,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyPrefabs: {fileID: 0}
   SpawnInterval: 1
+  EnemyParent: {fileID: 0}
+  MaxEnemiesInCluster: 3
+  MinEnemiesInCluster: 1
