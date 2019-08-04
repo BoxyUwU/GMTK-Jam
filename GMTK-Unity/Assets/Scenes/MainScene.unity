@@ -7353,7 +7353,7 @@ MonoBehaviour:
   TimerCount: 0
   CurrentTurretLimit: 0
   MinTurrets: 0
-  MaxTurrets: 6
+  MaxTurrets: 2
   TurretLimitIncreaseInterval: 15
 --- !u!4 &771892537
 Transform:

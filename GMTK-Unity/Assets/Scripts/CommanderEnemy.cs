@@ -119,6 +119,8 @@ public class CommanderEnemy : MonoBehaviour
         Vector2 position = enemy.transform.position;
         Vector2 velocity = enemy.GetComponent<Rigidbody2D>().velocity;
         GameObject instancedEnemy = Instantiate(prefab, GameObject.Find("EnemyContainer").transform);
+        Invincible invincible = instancedEnemy.AddComponent<Invincible>();
+        invincible.Duration = 0.5f;
         instancedEnemy.transform.position = position;
         instancedEnemy.GetComponent<Rigidbody2D>().velocity = velocity;
 

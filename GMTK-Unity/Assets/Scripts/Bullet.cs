@@ -45,12 +45,12 @@ public class Bullet : MonoBehaviour
             if (collision.gameObject.layer == 8)
             {
                 // Check the bullet hit a red dude as thet are the ONLY ONE we can attack
-                if (collision.gameObject.GetComponent<CommanderEnemy>() != null && bulletTeam.TeamID != TeamIDs.Turret)
+                if (collision.gameObject.GetComponent<CommanderEnemy>() != null && bulletTeam.TeamID != TeamIDs.Turret && collision.gameObject.GetComponent<Invincible>() == null)
                 {
                     collision.gameObject.GetComponent<Health>().Amount -= Damage;
                     GameObject.Find("GameManager").GetComponent<ScoreCounter>().Score++;
                 }
-                else if (collision.gameObject.GetComponent<StatueEnemy>() != null && bulletTeam.TeamID == TeamIDs.Turret)
+                else if (collision.gameObject.GetComponent<StatueEnemy>() != null && bulletTeam.TeamID == TeamIDs.Turret && collision.gameObject.GetComponent<Invincible>() == null)
                 {
                     // Comment this out to disable turret bullets killing statues
                     collision.gameObject.GetComponent<Health>().Amount -= Damage;

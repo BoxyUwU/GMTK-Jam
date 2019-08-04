@@ -142,16 +142,7 @@ public class PlayerController : MonoBehaviour
         // Add platforms we are in contact with to list
         if (collision.gameObject.layer == 10)
         {
-            collision.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
             collidedPlatforms.Add(collision.gameObject);
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == 10)
-        {
-            collision.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
         }
     }
 }
