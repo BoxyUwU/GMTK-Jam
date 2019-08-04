@@ -183,6 +183,6 @@ MonoBehaviour:
   TurretShootSound: {fileID: 0}
   CurrentTurretLimit: 0
   MinTurrets: 0
-  MaxTurrets: 2
+  MaxTurrets: 5
   TurretLimitIncreaseInterval: 30
   recalculateDirection: 1

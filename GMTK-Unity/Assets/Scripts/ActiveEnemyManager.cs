@@ -25,6 +25,12 @@ public class ActiveEnemyManager : MonoBehaviour
     public float ActiveEnemySwitchTime = 1;
     public float TimerCount = 0.0f;
 
+    public int CurrentTurretLimit;
+    public int MinTurrets;
+    public int MaxTurrets;
+    public float TurretLimitIncreaseInterval;
+    float turretIncreasCounter;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +42,21 @@ public class ActiveEnemyManager : MonoBehaviour
     void Update()
     {
         TimerCount += Time.deltaTime;
+        turretIncreasCounter += Time.deltaTime;
+
+        if (turretIncreasCounter >= TurretLimitIncreaseInterval)
+        {
+            turretIncreasCounter = 0;
+            if (CurrentTurretLimit < MaxTurrets)
+            {
+                CurrentTurretLimit++;
+            }
+        }
+
+        if (GameObject.Find("CommanderEnemy(Clone)") != null)
+        {
+            GameObject.Find("CommanderEnemy(Clone)").GetComponent<CommanderEnemy>().CurrentTurretLimit = CurrentTurretLimit;
+        }
 
         // Get an up to date list of enemies
         enemies.Clear();

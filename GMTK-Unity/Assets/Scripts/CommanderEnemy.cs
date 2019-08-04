@@ -13,10 +13,6 @@ public class CommanderEnemy : MonoBehaviour
     public GameObject TurretShootSound;
 
     public int CurrentTurretLimit;
-    public int MinTurrets;
-    public int MaxTurrets;
-    public float TurretLimitIncreaseInterval;
-    float turretIncreasCounter;
 
     List<GameObject> convertedEnemies;
     GameObject target;
@@ -31,18 +27,6 @@ public class CommanderEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Increase MaxTurrets;
-        turretIncreasCounter += Time.deltaTime;
-        GameObject.Find("GameManager").GetComponent<ScoreCounter>().Text.GetComponent<UnityEngine.UI.Text>().text = turretIncreasCounter.ToString();
-        Debug.Log(TurretLimitIncreaseInterval);
-        if (turretIncreasCounter >= TurretLimitIncreaseInterval)
-        {
-            turretIncreasCounter = 0.0f;
-            if (CurrentTurretLimit < MaxTurrets)
-                CurrentTurretLimit++;
-        }
-
-
         // Get number of turrets
         int turrets = 0;
         foreach (Transform child in GameObject.Find("EnemyContainer").transform)
