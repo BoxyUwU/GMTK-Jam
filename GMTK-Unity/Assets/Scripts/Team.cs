@@ -6,6 +6,7 @@ public enum TeamIDs
 {
     Player,
     Enemy,
+    Turret,
 }
 
 public class Team : MonoBehaviour

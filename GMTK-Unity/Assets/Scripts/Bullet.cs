@@ -45,9 +45,18 @@ public class Bullet : MonoBehaviour
             if (collision.gameObject.layer == 8)
             {
                 // Check the bullet hit a red dude as thet are the ONLY ONE we can attack
-                if (collision.gameObject.GetComponent<CommanderEnemy>() != null)
+                if (collision.gameObject.GetComponent<CommanderEnemy>() != null && bulletTeam.TeamID != TeamIDs.Turret)
                 {
                     collision.gameObject.GetComponent<Health>().Amount -= Damage;
+                }
+                if (collision.gameObject.GetComponent<StatueEnemy>() != null && bulletTeam.TeamID == TeamIDs.Turret)
+                {
+                    // Comment this out to disable turret bullets killing statues
+                    collision.gameObject.GetComponent<Health>().Amount -= Damage;
+                    Destroy(this.gameObject);
+                    // Comment above to disable turret bullets killing statues
+
+                    return;
                 }
             } // Check if we hit player head collision box
             else

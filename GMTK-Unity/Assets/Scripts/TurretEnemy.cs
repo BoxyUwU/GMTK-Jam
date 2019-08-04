@@ -80,7 +80,7 @@ public class TurretEnemy : MonoBehaviour
                 instantiatedBullet.transform.Rotate(0, 0, Random.Range(-BulletAngleVariation, BulletAngleVariation));
 
                 instantiatedBullet.AddComponent<Team>();
-                instantiatedBullet.GetComponent<Team>().TeamID = TeamIDs.Enemy;
+                instantiatedBullet.GetComponent<Team>().TeamID = this.GetComponent<Team>().TeamID;
             }
 
             // Increment burst duration counter
