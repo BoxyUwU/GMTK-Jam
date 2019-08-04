@@ -49,7 +49,7 @@ public class Bullet : MonoBehaviour
                 {
                     collision.gameObject.GetComponent<Health>().Amount -= Damage;
                 }
-            } // The only thing it could have hit here is a player
+            } // Check if we hit player head collision box
             else
             {
                 // Dont deal damage if we are invincible

@@ -13,6 +13,11 @@ public class TurretEnemy : MonoBehaviour
     public float BurstDuration;
     public float BurstCoolDown;
 
+    public float LaserStartWidth;
+    public float LaserEndWidth;
+    public Color LaserStartColor;
+    public Color LaserEndColor;
+
     float fireRateCounter;
     float burstCooldownCounter;
     float burstDurationCounter;
@@ -36,6 +41,25 @@ public class TurretEnemy : MonoBehaviour
         // and then a cooldown period where it doesn't shoot
         // the periods of shooting are referred to here as "bursts"
         // The firerate is the time between each individual bullet is fired during a burst
+
+        // Draw laser between Turret and Commander
+        LineRenderer lineRenderer = GetComponent<LineRenderer>();
+        GameObject commander = GameObject.Find("CommanderEnemy(Clone)");
+        
+        if (commander == null)
+        {
+            lineRenderer.enabled = false;
+        }
+        else
+        {
+            lineRenderer.enabled = true;
+            lineRenderer.SetPosition(0, transform.position);
+            lineRenderer.SetPosition(1, commander.transform.position);
+            lineRenderer.startWidth = LaserStartWidth;
+            lineRenderer.endWidth = LaserEndWidth;
+            lineRenderer.startColor = LaserStartColor;
+            lineRenderer.endColor = LaserEndColor;
+        }
 
         // If we are in a burst
         if (firing)
