@@ -20,6 +20,7 @@ public class Restart : MonoBehaviour
         {
             Destroy(GameObject.Find("EnemySpawners"));
             Destroy(GameObject.Find("EnemyContainer"));
+            this.gameObject.GetComponent<LineRenderer>().enabled = false;
             RestartButton.SetActive(true);
         }
 
