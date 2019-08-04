@@ -101,6 +101,7 @@ MonoBehaviour:
   EnemyParent: {fileID: 0}
   MaxEnemiesInCluster: 3
   MinEnemiesInCluster: 1
-  timeBetweenMaxEnemyIncrease: 5
-  MaxEnemiesInScene: 10
+  EnemyIncreaseInterval: 5
+  UpperMaxEnemiesInScene: 30
+  CurrentMaxEnemiesInScene: 10
   RelativeSpawnPositions: []

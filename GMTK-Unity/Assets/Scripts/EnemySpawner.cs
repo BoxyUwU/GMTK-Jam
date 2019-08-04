@@ -15,7 +15,8 @@ public class EnemySpawner : MonoBehaviour
     private float maxEnemyIncreaseTimer;
     public float EnemyIncreaseInterval;
 
-    public int MaxEnemiesInScene = 10;
+    public int UpperMaxEnemiesInScene;
+    public int CurrentMaxEnemiesInScene = 10;
 
     public List<Vector2> RelativeSpawnPositions;
 
@@ -46,7 +47,7 @@ public class EnemySpawner : MonoBehaviour
         maxEnemyIncreaseTimer += Time.deltaTime;
         if (maxEnemyIncreaseTimer > EnemyIncreaseInterval)
         {
-            MaxEnemiesInScene += 1;
+            CurrentMaxEnemiesInScene += 1;
             maxEnemyIncreaseTimer = 0f;
         }
 
@@ -54,7 +55,7 @@ public class EnemySpawner : MonoBehaviour
 
 
         spawnTimerCount += Time.deltaTime;
-        if (spawnTimerCount >= InitialSpawnInterval && GetEnemiesInScene() < MaxEnemiesInScene)
+        if (spawnTimerCount >= InitialSpawnInterval && GetEnemiesInScene() < CurrentMaxEnemiesInScene)
         {
             spawnTimerCount -= ((int)(spawnTimerCount / InitialSpawnInterval)) * InitialSpawnInterval;
 
