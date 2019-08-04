@@ -12,7 +12,8 @@ public class TurretEnemy : MonoBehaviour
     public float FireRate;
     public float BurstDuration;
     public float BurstCoolDown;
-
+    public GameObject ShootSound;
+    AudioClip shootSoundClip;
     public float LaserStartWidth;
     public float LaserEndWidth;
     public Color LaserStartColor;
@@ -32,6 +33,7 @@ public class TurretEnemy : MonoBehaviour
         {
             burstCooldownCounter = BurstCoolDown - 0.5f;
         }
+        shootSoundClip = ShootSound.GetComponent<AudioSource>().clip;
     }
 
     // Update is called once per frame
@@ -69,6 +71,7 @@ public class TurretEnemy : MonoBehaviour
             if (fireRateCounter >= FireRate)
             {
                 fireRateCounter -= ((int)(fireRateCounter / FireRate)) * FireRate;
+                ShootSound.GetComponent<AudioSource>().PlayOneShot(shootSoundClip);
                 GameObject instantiatedBullet = Instantiate(BulletPrefab, GameObject.Find("BulletContainer").transform);
 
                 instantiatedBullet.transform.position = this.transform.position;

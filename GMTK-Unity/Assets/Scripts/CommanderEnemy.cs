@@ -10,6 +10,7 @@ public class CommanderEnemy : MonoBehaviour
     public float ConversionDistance;
     public GameObject ConvertedEnemyPrefab;
     public GameObject RevertedEnemyPrefab;
+    public GameObject TurretShootSound;
 
     List<GameObject> convertedEnemies;
     GameObject target;
@@ -107,6 +108,11 @@ public class CommanderEnemy : MonoBehaviour
         GameObject instancedEnemy = Instantiate(prefab, GameObject.Find("EnemyContainer").transform);
         instancedEnemy.transform.position = position;
         instancedEnemy.GetComponent<Rigidbody2D>().velocity = velocity;
+
+        if (instancedEnemy.GetComponent<TurretEnemy>() != null)
+        {
+            instancedEnemy.GetComponent<TurretEnemy>().ShootSound = TurretShootSound;
+        }
         Destroy(enemy);
     }
 }

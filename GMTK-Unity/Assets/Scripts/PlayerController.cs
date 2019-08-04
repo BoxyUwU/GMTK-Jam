@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     //Variables
+    public GameObject FireSound;
+    public AudioClip FireSoundClip;
     public float WalkSpeed;
     public float JumpSpeed;
     public float MaxSpeed;
@@ -27,6 +29,7 @@ public class PlayerController : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         collidedPlatforms = new List<GameObject>();
         droppedPlatforms = new List<GameObject>();
+        FireSoundClip = FireSound.GetComponent<AudioSource>().clip;
     }
 
     void Update()
@@ -105,6 +108,8 @@ public class PlayerController : MonoBehaviour
             if (fireRateCooldownTimer >= FireRate)
             {
                 fireRateCooldownTimer = 0;
+
+                FireSound.GetComponent<AudioSource>().PlayOneShot(FireSoundClip);
 
                 GameObject instancedBullet = Instantiate(BulletPrefab, BulletContainer.transform, false);
                 instancedBullet.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, instancedBullet.transform.position.z);

@@ -7,6 +7,7 @@ public class ActiveEnemyManager : MonoBehaviour
     public GameObject CommanderPrefab;
     public GameObject TurretPrefab;
     public GameObject StatuePrefab;
+    public GameObject TurretShootSound;
 
     public GameObject EnemyContainer;
     GameObject activeEnemy;
@@ -101,6 +102,12 @@ public class ActiveEnemyManager : MonoBehaviour
         GameObject instancedEnemy = Instantiate(prefab, EnemyContainer.transform);
         instancedEnemy.transform.position = position;
         instancedEnemy.GetComponent<Rigidbody2D>().velocity = velocity;
+
+        if (instancedEnemy.GetComponent<CommanderEnemy>() != null)
+        {
+            instancedEnemy.GetComponent<CommanderEnemy>().TurretShootSound = TurretShootSound;
+        }
+
         Destroy(enemy);
     }
 

@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed69dce1d942c4b4a83fcaab1bf1753b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Pain: {fileID: 0}
   MaxHealth: 0
   Amount: 1
 --- !u!114 &5823712592196921118
@@ -131,6 +132,8 @@ MonoBehaviour:
   FireRate: 0.05
   BurstDuration: 1
   BurstCoolDown: 2
+  ShootSound: {fileID: 3382837461746142182, guid: 4c8a05da4beef9a419054ade547de978,
+    type: 3}
   LaserStartWidth: 0.25
   LaserEndWidth: 0.25
   LaserStartColor: {r: 0.99110734, g: 1, b: 0, a: 1}
