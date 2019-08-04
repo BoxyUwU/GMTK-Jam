@@ -129,9 +129,9 @@ MonoBehaviour:
   BulletPrefab: {fileID: 8652547241521687119, guid: dc9b40f8ee3e6a4428a5811338217a03,
     type: 3}
   BulletAngleVariation: 1
-  FireRate: 0.05
-  BurstDuration: 1
-  BurstCoolDown: 2
+  FireRate: 0.15
+  BurstDuration: 0.5
+  BurstCoolDown: 6
   ShootSound: {fileID: 3382837461746142182, guid: 4c8a05da4beef9a419054ade547de978,
     type: 3}
   LaserStartWidth: 0.25

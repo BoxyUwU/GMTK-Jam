@@ -6979,7 +6979,7 @@ MonoBehaviour:
   MaxEndWith: 0.5
   LaserStartColor: {r: 1, g: 0.9705, b: 0.41000003, a: 1}
   LaserEndColor: {r: 1, g: 0, b: 0, a: 1}
-  ActiveEnemySwitchTime: 1
+  ActiveEnemySwitchTime: 2
   TimerCount: 0
 --- !u!4 &771892537
 Transform:
@@ -10554,7 +10554,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Pain: {fileID: 161466293}
   MaxHealth: 5
-  Amount: 5
+  Amount: 100
 --- !u!114 &1138877870
 MonoBehaviour:
   m_ObjectHideFlags: 0
