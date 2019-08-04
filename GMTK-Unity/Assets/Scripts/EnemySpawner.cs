@@ -8,10 +8,12 @@ public class EnemySpawner : MonoBehaviour
     public int minTime;
 
     public GameObject EnemyPrefabs;
-    public int SpawnInterval;
+    public int InitialSpawnInterval;
     public GameObject EnemyParent;
     public int MaxEnemiesInCluster;
     public int MinEnemiesInCluster;
+    private float maxEnemyIncreaseTimer;
+    public float EnemyIncreaseInterval;
 
     public int MaxEnemiesInScene = 10;
 
@@ -32,21 +34,31 @@ public class EnemySpawner : MonoBehaviour
             new Vector2(-0.5f, -1),
         };
 
-        if (SpawnInterval > 0.5f)
+        if (InitialSpawnInterval > 0.5f)
         {
-            spawnTimerCount = SpawnInterval - 0.5f;
+            spawnTimerCount = InitialSpawnInterval - 0.5f;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        spawnTimerCount += Time.deltaTime;
-        if (spawnTimerCount >= SpawnInterval && GetEnemiesInScene() < MaxEnemiesInScene)
+        maxEnemyIncreaseTimer += Time.deltaTime;
+        if (maxEnemyIncreaseTimer > EnemyIncreaseInterval)
         {
-            spawnTimerCount -= ((int)(spawnTimerCount / SpawnInterval)) * SpawnInterval;
+            MaxEnemiesInScene += 1;
+            maxEnemyIncreaseTimer = 0f;
+        }
 
-            SpawnInterval = Random.Range(minTime, maxTime);
+
+
+
+        spawnTimerCount += Time.deltaTime;
+        if (spawnTimerCount >= InitialSpawnInterval && GetEnemiesInScene() < MaxEnemiesInScene)
+        {
+            spawnTimerCount -= ((int)(spawnTimerCount / InitialSpawnInterval)) * InitialSpawnInterval;
+
+            InitialSpawnInterval = Random.Range(minTime, maxTime);
 
             int amountToSpawn = Random.Range(MinEnemiesInCluster, MaxEnemiesInCluster + 1);
 
