@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public int maxTime;
+    public int minTime;
+
     public GameObject EnemyPrefabs;
     public int SpawnInterval;
     public GameObject EnemyParent;
@@ -42,6 +45,8 @@ public class EnemySpawner : MonoBehaviour
         if (spawnTimerCount >= SpawnInterval && GetEnemiesInScene() < MaxEnemiesInScene)
         {
             spawnTimerCount -= ((int)(spawnTimerCount / SpawnInterval)) * SpawnInterval;
+
+            SpawnInterval = Random.Range(minTime, maxTime);
 
             int amountToSpawn = Random.Range(MinEnemiesInCluster, MaxEnemiesInCluster + 1);
 
