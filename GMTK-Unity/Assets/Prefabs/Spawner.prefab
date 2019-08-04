@@ -97,9 +97,10 @@ MonoBehaviour:
   minTime: 2
   EnemyPrefabs: {fileID: 1670121219711786199, guid: 7c20235bf6e5b744896dc081a15223e2,
     type: 3}
-  SpawnInterval: 4
+  InitialSpawnInterval: 5
   EnemyParent: {fileID: 0}
   MaxEnemiesInCluster: 3
   MinEnemiesInCluster: 1
-  MaxEnemiesInScene: 15
+  timeBetweenMaxEnemyIncrease: 5
+  MaxEnemiesInScene: 10
   RelativeSpawnPositions: []
