@@ -32,7 +32,12 @@ public class TurretEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // If we are in a birst
+        // The shooty AI currently works by having periods of shooting
+        // and then a cooldown period where it doesn't shoot
+        // the periods of shooting are referred to here as "bursts"
+        // The firerate is the time between each individual bullet is fired during a burst
+
+        // If we are in a burst
         if (firing)
         {
             // Fire bullets
@@ -44,6 +49,7 @@ public class TurretEnemy : MonoBehaviour
 
                 instantiatedBullet.transform.position = this.transform.position;
                 instantiatedBullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, target.transform.position - instantiatedBullet.transform.position);
+                // Add some small variation to bullet trajectory so it isn't a laser (although a laser would be easier to dodge)
                 instantiatedBullet.transform.Rotate(0, 0, Random.Range(-BulletAngleVariation, BulletAngleVariation));
 
                 instantiatedBullet.AddComponent<Team>();

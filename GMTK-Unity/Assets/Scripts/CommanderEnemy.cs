@@ -30,28 +30,25 @@ public class CommanderEnemy : MonoBehaviour
             // Make sure we have an enemy
             if (child.gameObject.layer == 8)
             {
+                // Checks if there are enemies within a square around the CommanderEnemy
                 bool withinConversionDistance = false;
                 Vector2 childPosition = child.transform.position;
                 Vector2 enemyPosition = this.transform.position;
                 float dX = Mathf.Abs(enemyPosition.x - childPosition.x);
                 float dY = Mathf.Abs(enemyPosition.y - childPosition.y);
                 float distance = Mathf.Max(dX, dY);
-
                 if (distance <= ConversionDistance)
                     withinConversionDistance = true;
 
+                // Convert statues into shooty dudes
                 if (withinConversionDistance && child.GetComponent<StatueEnemy>() != null)
                 {
                     SwapEnemyType(child.gameObject, ConvertedEnemyPrefab);
-                } 
+                } // Turn shooty dudes back into statues if out of range
                 else if (!withinConversionDistance && child.GetComponent<TurretEnemy>() != null)
                 {
                     SwapEnemyType(child.gameObject, RevertedEnemyPrefab);
                 }
-            }
-            else
-            {
-
             }
         }
 
@@ -61,6 +58,7 @@ public class CommanderEnemy : MonoBehaviour
 
     private void UpdateVelocity()
     {
+        // Move towards where the player is but with some innacuracy
         recalculateDirection = false;
         Vector2 velocity = (target.transform.position - this.transform.position).normalized;
         velocity = Quaternion.AngleAxis(Random.Range(-10, 10), Vector3.forward) * velocity;
@@ -78,8 +76,11 @@ public class CommanderEnemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Layer 13 is a collider that is attached to the player for the sole purpose of allowing us to have enemies move through players
+        // but still be able to check if enemies and players overlap
         if (collision.gameObject.layer == 13)
         {
+            // Same code as in Bullet.CS
             if (GameObject.Find("Player").GetComponent<Invincible>() == null)
             {
                 GameObject.Find("Player").GetComponent<Health>().Amount -= Damage;
@@ -96,6 +97,8 @@ public class CommanderEnemy : MonoBehaviour
         }
     }
 
+    // This is the function used to convert statues into shooty dudes.
+    // we remove the statue and then spawn in a new enemy of the shooty type.
     private void SwapEnemyType(GameObject enemy, GameObject prefab)
     {
         Vector2 position = enemy.transform.position;

@@ -16,9 +16,11 @@ public class StatueEnemy : MonoBehaviour
     void Start()
     {
         target = GameObject.Find("Player");
-        Debug.Log(this.GetComponent<Rigidbody2D>().velocity.magnitude);
+
+        // This code is here so that when we convert shooty dudes back to statue dudes they don't change direction
         if (recalculateDirection && this.GetComponent<Rigidbody2D>().velocity.magnitude > 0.05f)
         {
+            // We take out existing velocity and change it's magnitude to be equal to be our actual speed
             this.GetComponent<Rigidbody2D>().velocity = this.GetComponent<Rigidbody2D>().velocity.normalized * Speed;
             recalculateDirection = false;
         }
@@ -54,6 +56,7 @@ public class StatueEnemy : MonoBehaviour
     {
         if (collision.gameObject.layer == 13)
         {
+            // Same code as in Bullet.CS
             if (GameObject.Find("Player").GetComponent<Invincible>() == null)
             {
                 GameObject.Find("Player").GetComponent<Health>().Amount -= Damage;

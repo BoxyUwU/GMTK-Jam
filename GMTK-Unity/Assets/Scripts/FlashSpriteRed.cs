@@ -19,6 +19,10 @@ public class FlashSpriteRed : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Lerps the color from the startColor -> targetColor -> startColor again
+        // Sets the color back to what it was before lerping to make sure there are no slight floating point errors
+        // during the lerp that would leave us with a slightly discolored sprite
+
         count += Time.deltaTime;
         if (count <= Duration / 2)
         {

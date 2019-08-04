@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SwitchTimerBar : MonoBehaviour
 {
+    // This class isn't used anymore but you can re-enable it's functionality
+    // by going to the SwitchTimerBar in heirarchy and clicking the tick box at the top right to reanable the gameObject
     public GameObject GameManager;
     public GameObject FillObject;
     public float MaxScale;

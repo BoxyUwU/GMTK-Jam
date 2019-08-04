@@ -47,6 +47,12 @@ public class PlayerController : MonoBehaviour
             }
         }
         
+        // The way we currently do platforms is when we collide with a platform and are holding down S the platform
+        // gets added to the collidedPlatforms list, then in update we set the colliders on all the platforms
+        // in that list to disabled. We then put all the colliders that are disabled into a seperate list so we
+        // can re-enable all the collisions when no longer holding the key down.
+        // In the movement issue on github I briefly discuss changing the way this works to disable
+        // ALL platform colliders rather than just ones that we come into contact with.
         if (Input.GetKey(KeyCode.S))
         {
             foreach (var gameObject in collidedPlatforms)
