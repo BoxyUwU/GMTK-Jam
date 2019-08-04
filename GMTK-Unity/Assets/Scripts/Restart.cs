@@ -14,10 +14,9 @@ public class Restart : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("r"))
+        if (Input.GetKeyDown("r") || GameObject.Find("Player") == null)
         { //If you press R
-            SceneManager.LoadScene("MainScene"); //Load scene called Game
-
+            SceneManager.LoadScene("MainScene"); //Load scene called 
         }
-        }
+    }
 }
