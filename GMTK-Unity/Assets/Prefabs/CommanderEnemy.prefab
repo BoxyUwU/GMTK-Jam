@@ -181,5 +181,8 @@ MonoBehaviour:
   RevertedEnemyPrefab: {fileID: 1670121219711786199, guid: 7c20235bf6e5b744896dc081a15223e2,
     type: 3}
   TurretShootSound: {fileID: 0}
-  MaxTurrets: 1
+  CurrentTurretLimit: 0
+  MinTurrets: 0
+  MaxTurrets: 2
+  TurretLimitIncreaseInterval: 30
   recalculateDirection: 1

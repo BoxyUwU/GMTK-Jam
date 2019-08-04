@@ -4182,11 +4182,6 @@ PrefabInstance:
       propertyPath: EnemyParent
       value: 
       objectReference: {fileID: 893324243}
-    - target: {fileID: 7646521435836707141, guid: 26502a38534b95c478e9973ea02b88b4,
-        type: 3}
-      propertyPath: EnemyIncreaseInterval
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26502a38534b95c478e9973ea02b88b4, type: 3}
 --- !u!4 &387313321 stripped
@@ -8447,11 +8442,6 @@ PrefabInstance:
       propertyPath: EnemyParent
       value: 
       objectReference: {fileID: 893324243}
-    - target: {fileID: 7646521435836707141, guid: 26502a38534b95c478e9973ea02b88b4,
-        type: 3}
-      propertyPath: EnemyIncreaseInterval
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26502a38534b95c478e9973ea02b88b4, type: 3}
 --- !u!4 &889114644 stripped

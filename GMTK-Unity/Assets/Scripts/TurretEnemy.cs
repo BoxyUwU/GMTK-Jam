@@ -31,7 +31,7 @@ public class TurretEnemy : MonoBehaviour
     void Start()
     {
         target = GameObject.Find("Player");
-        burstCooldownCounter = BurstCoolDown;
+        burstCooldownCounter = BurstCoolDown - 0.2f;
         shootSoundClip = ShootSound.GetComponent<AudioSource>().clip;
     }
 

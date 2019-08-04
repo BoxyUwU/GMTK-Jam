@@ -10,8 +10,18 @@ public class EnemySpawner : MonoBehaviour
     public GameObject EnemyPrefabs;
     public int InitialSpawnInterval;
     public GameObject EnemyParent;
+
     public int MaxEnemiesInCluster;
     public int MinEnemiesInCluster;
+    public int UpperMaxEnemiesInCluster;
+    public int UpperMinEnemiesInCluster;
+
+    public float MaxEnemiesInClusterIncreaseInterval;
+    public float MinEnemiesInClusterIncreaseInterval;
+
+    float maxEnemyInClusterIncreaseTimer;
+    float minEnemyInClusterIncreaseTimer;
+
     private float maxEnemyIncreaseTimer;
     public float EnemyIncreaseInterval;
 
@@ -45,10 +55,28 @@ public class EnemySpawner : MonoBehaviour
     void Update()
     {
         maxEnemyIncreaseTimer += Time.deltaTime;
-        if (maxEnemyIncreaseTimer > EnemyIncreaseInterval)
+        maxEnemyInClusterIncreaseTimer += Time.deltaTime;
+        minEnemyInClusterIncreaseTimer += Time.deltaTime;
+        if (maxEnemyIncreaseTimer >= EnemyIncreaseInterval)
         {
             CurrentMaxEnemiesInScene += 1;
             maxEnemyIncreaseTimer = 0f;
+        }
+        if (maxEnemyInClusterIncreaseTimer >= MaxEnemiesInClusterIncreaseInterval)
+        {
+            if (MaxEnemiesInCluster < UpperMaxEnemiesInCluster)
+            {
+                MaxEnemiesInCluster++;
+            }
+            maxEnemyInClusterIncreaseTimer = 0;
+        }
+        if (minEnemyInClusterIncreaseTimer >= MinEnemiesInClusterIncreaseInterval)
+        {
+            if (MinEnemiesInCluster < UpperMinEnemiesInCluster)
+            {
+                MinEnemiesInCluster++;
+            }
+            minEnemyInClusterIncreaseTimer = 0;
         }
 
 
