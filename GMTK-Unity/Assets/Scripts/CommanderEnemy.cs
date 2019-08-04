@@ -11,6 +11,7 @@ public class CommanderEnemy : MonoBehaviour
     public GameObject ConvertedEnemyPrefab;
     public GameObject RevertedEnemyPrefab;
     public GameObject TurretShootSound;
+    public int MaxTurrets;
 
     List<GameObject> convertedEnemies;
     GameObject target;
@@ -25,6 +26,17 @@ public class CommanderEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        // Get number of turrets
+        int turrets = 0;
+        foreach (Transform child in GameObject.Find("EnemyContainer").transform)
+        {
+            if (child.GetComponent<TurretEnemy>() != null)
+            {
+                turrets++;
+            }
+        }
+
         // Get an up to date list of enemies
         foreach (Transform child in GameObject.Find("EnemyContainer").transform)
         {
@@ -42,8 +54,9 @@ public class CommanderEnemy : MonoBehaviour
                     withinConversionDistance = true;
 
                 // Convert statues into shooty dudes
-                if (withinConversionDistance && child.GetComponent<StatueEnemy>() != null)
+                if (withinConversionDistance && child.GetComponent<StatueEnemy>() != null && turrets < MaxTurrets)
                 {
+                    turrets++;
                     SwapEnemyType(child.gameObject, ConvertedEnemyPrefab);
                 } // Turn shooty dudes back into statues if out of range
                 else if (!withinConversionDistance && child.GetComponent<TurretEnemy>() != null)

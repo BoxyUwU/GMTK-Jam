@@ -23,16 +23,15 @@ public class TurretEnemy : MonoBehaviour
     float burstCooldownCounter;
     float burstDurationCounter;
 
+    Vector2 firePosition;
+    bool setDirection = true;
     bool firing;
 
     // Start is called before the first frame update
     void Start()
     {
         target = GameObject.Find("Player");
-        if (BurstCoolDown >= 0.5f)
-        {
-            burstCooldownCounter = BurstCoolDown - 0.5f;
-        }
+        burstCooldownCounter = BurstCoolDown;
         shootSoundClip = ShootSound.GetComponent<AudioSource>().clip;
     }
 
@@ -66,6 +65,13 @@ public class TurretEnemy : MonoBehaviour
         // If we are in a burst
         if (firing)
         {
+            if (setDirection)
+            {
+                firePosition = target.transform.position;
+                fireRateCounter = FireRate;
+            }
+            setDirection = false;
+
             // Fire bullets
             fireRateCounter += Time.deltaTime;
             if (fireRateCounter >= FireRate)
@@ -75,7 +81,7 @@ public class TurretEnemy : MonoBehaviour
                 GameObject instantiatedBullet = Instantiate(BulletPrefab, GameObject.Find("BulletContainer").transform);
 
                 instantiatedBullet.transform.position = this.transform.position;
-                instantiatedBullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, target.transform.position - instantiatedBullet.transform.position);
+                instantiatedBullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, (Vector3)firePosition - instantiatedBullet.transform.position);
                 // Add some small variation to bullet trajectory so it isn't a laser (although a laser would be easier to dodge)
                 instantiatedBullet.transform.Rotate(0, 0, Random.Range(-BulletAngleVariation, BulletAngleVariation));
 
@@ -90,6 +96,7 @@ public class TurretEnemy : MonoBehaviour
                 burstDurationCounter = 0f;
                 burstCooldownCounter = 0f;
                 firing = false;
+                setDirection = true;
             }
         } // If we are in the cooldown period between bursts
         else if (firing == false)

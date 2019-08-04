@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed69dce1d942c4b4a83fcaab1bf1753b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Pain: {fileID: 0}
   MaxHealth: 0
   Amount: 1
 --- !u!114 &842703361811555071
@@ -179,4 +180,6 @@ MonoBehaviour:
     type: 3}
   RevertedEnemyPrefab: {fileID: 1670121219711786199, guid: 7c20235bf6e5b744896dc081a15223e2,
     type: 3}
+  TurretShootSound: {fileID: 0}
+  MaxTurrets: 1
   recalculateDirection: 1

@@ -49,13 +49,17 @@ public class Bullet : MonoBehaviour
                 {
                     collision.gameObject.GetComponent<Health>().Amount -= Damage;
                 }
-                if (collision.gameObject.GetComponent<StatueEnemy>() != null && bulletTeam.TeamID == TeamIDs.Turret)
+                else if (collision.gameObject.GetComponent<StatueEnemy>() != null && bulletTeam.TeamID == TeamIDs.Turret)
                 {
                     // Comment this out to disable turret bullets killing statues
                     collision.gameObject.GetComponent<Health>().Amount -= Damage;
                     Destroy(this.gameObject);
                     // Comment above to disable turret bullets killing statues
 
+                    return;
+                }
+                if (collision.gameObject.GetComponent<CommanderEnemy>() != null && bulletTeam.TeamID == TeamIDs.Turret)
+                {
                     return;
                 }
             } // Check if we hit player head collision box
