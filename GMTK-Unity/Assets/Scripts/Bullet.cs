@@ -48,6 +48,7 @@ public class Bullet : MonoBehaviour
                 if (collision.gameObject.GetComponent<CommanderEnemy>() != null && bulletTeam.TeamID != TeamIDs.Turret)
                 {
                     collision.gameObject.GetComponent<Health>().Amount -= Damage;
+                    GameObject.Find("GameManager").GetComponent<ScoreCounter>().Score++;
                 }
                 else if (collision.gameObject.GetComponent<StatueEnemy>() != null && bulletTeam.TeamID == TeamIDs.Turret)
                 {
