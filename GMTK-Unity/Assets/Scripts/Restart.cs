@@ -21,6 +21,7 @@ public class Restart : MonoBehaviour
             Destroy(GameObject.Find("EnemySpawners"));
             Destroy(GameObject.Find("EnemyContainer"));
             this.gameObject.GetComponent<LineRenderer>().enabled = false;
+            GameObject.Find("SwitchTimerBar").SetActive(false);
             RestartButton.SetActive(true);
         }
 
