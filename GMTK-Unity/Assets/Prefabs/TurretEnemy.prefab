@@ -128,7 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletPrefab: {fileID: 8652547241521687119, guid: dc9b40f8ee3e6a4428a5811338217a03,
     type: 3}
-  BulletAngleVariation: 0
+  BulletAngleVariation: 5
   FireRate: 0.15
   BurstDuration: 0.5
   BurstCoolDown: 6
