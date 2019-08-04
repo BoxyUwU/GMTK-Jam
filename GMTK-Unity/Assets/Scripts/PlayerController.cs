@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
     //Variables
     public float WalkSpeed;
     public float JumpSpeed;

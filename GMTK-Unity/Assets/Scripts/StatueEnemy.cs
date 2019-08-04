@@ -69,6 +69,7 @@ public class StatueEnemy : MonoBehaviour
                     flashRed.startColor = new Color(1, 0, 0, 0.125f);
                     flashRed.targetColor = new Color(1, 0, 0, 1f);
                 }
+                GameObject.Find("Player").GetComponent<Health>().PlayPainSound();
             }
         }
     }

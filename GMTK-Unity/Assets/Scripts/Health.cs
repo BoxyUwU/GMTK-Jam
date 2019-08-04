@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    public GameObject Pain;
     public int MaxHealth;
     public int Amount;
 
@@ -11,6 +12,11 @@ public class Health : MonoBehaviour
     void Start()
     {
         
+    }
+
+    public void PlayPainSound()
+    {
+        Pain.GetComponent<AudioSource>().Play();
     }
 
     // Update is called once per frame

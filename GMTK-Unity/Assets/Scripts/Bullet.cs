@@ -68,6 +68,7 @@ public class Bullet : MonoBehaviour
                         flashRed.startColor = new Color(1, 0, 0, 0.125f);
                         flashRed.targetColor = new Color(1, 0, 0, 1f);
                     }
+                    collision.gameObject.GetComponent<Health>().PlayPainSound();
                 }
             }
             Destroy(this.gameObject);
